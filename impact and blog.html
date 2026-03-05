@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Updates & Portfolio | Advocacy for the Unhoused</title>
+  <title>Updates | Advocacy for the Unhoused</title>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -14,7 +14,6 @@
       --muted:  #7a6a62;
       --border: #e0d8d0;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -35,15 +34,14 @@
     .hero::after {
       content: 'UPDATES';
       position: absolute;
-      right: -20px;
+      right: -10px;
       top: 50%;
       transform: translateY(-50%) rotate(90deg);
       font-family: 'Abril Fatface', serif;
-      font-size: 7rem;
+      font-size: 8rem;
       color: rgba(0,0,0,0.04);
       white-space: nowrap;
       pointer-events: none;
-      letter-spacing: -2px;
     }
     .hero-eyebrow {
       font-size: 0.7rem;
@@ -68,483 +66,436 @@
       line-height: 1.8;
     }
 
-    /* ── TABS ── */
-    .tabs-bar {
-      background: var(--cream);
-      border-bottom: 4px solid var(--dark);
+    /* ── STATS BAR ── */
+    .stats-bar {
       display: flex;
-      gap: 0;
+      border-bottom: 4px solid var(--dark);
+      background: var(--dark);
+    }
+    .stat-item {
+      flex: 1;
+      padding: 22px 28px;
+      border-right: 2px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-val {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.9rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 5px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--cream);
+      border-bottom: 3px solid var(--dark);
       padding: 0 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 50;
     }
-    .tab-btn {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1rem;
-      padding: 18px 28px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--muted);
-      border-bottom: 4px solid transparent;
-      margin-bottom: -4px;
-      transition: color 0.2s, border-color 0.2s;
-      letter-spacing: 0.5px;
-    }
-    .tab-btn.active {
-      color: var(--dark);
-      border-bottom-color: var(--orange);
-    }
-    .tab-btn:hover { color: var(--dark); }
-
-    /* ── MAIN LAYOUT ── */
-    .page-body {
-      background: var(--cream);
-      min-height: 80vh;
-      padding: 56px 8% 80px;
-    }
-
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
-    /* ── SECTION HEADER ── */
-    .section-head {
+    .filter-tags {
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid var(--dark);
-      flex-wrap: wrap;
-      gap: 16px;
+      gap: 0;
+      overflow-x: auto;
     }
-    .section-head h2 {
-      font-family: 'Abril Fatface', serif;
-      font-size: 2.2rem;
-      line-height: 1;
-    }
-
-    /* ── ADD BUTTON ── */
-    .add-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--dark);
-      color: var(--cream);
-      border: none;
-      padding: 12px 22px;
+    .filter-tag {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .add-btn:hover {
-      background: var(--orange);
-      box-shadow: 4px 4px 0 var(--dark);
-      transform: translate(-2px, -2px);
-    }
-
-    /* ── BLOG GRID ── */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .blog-card {
-      background: var(--white);
-      border: 3px solid var(--dark);
-      transition: transform 0.15s, box-shadow 0.15s;
-      cursor: pointer;
-      position: relative;
-    }
-    .blog-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 8px 8px 0 var(--orange);
-    }
-    .blog-card-tag {
-      display: inline-block;
-      background: var(--orange);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-    }
-    .blog-card-body { padding: 20px 24px 24px; }
-    .blog-card-date {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .blog-card-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.4rem;
-      line-height: 1.1;
-      color: var(--dark);
-      margin-bottom: 12px;
-    }
-    .blog-card-excerpt {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .blog-card-footer {
-      padding: 14px 24px;
-      border-top: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .blog-card-author {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .read-more {
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .filter-tag.active { color: var(--dark); border-bottom-color: var(--orange); }
+    .filter-tag:hover { color: var(--dark); }
+    .admin-btn {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      background: none;
+      border: 2px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .admin-btn:hover, .admin-btn.unlocked {
+      background: var(--dark);
+      color: var(--cream);
+      border-color: var(--dark);
+    }
+    .admin-btn.unlocked { background: var(--orange); border-color: var(--orange); color: white; }
+
+    /* ── BODY ── */
+    .page-body {
+      background: var(--cream);
+      min-height: 80vh;
+      padding: 52px 8% 80px;
+    }
+
+    /* ── FEATURED POST ── */
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--dark);
+      margin-bottom: 36px;
+      background: var(--white);
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      position: relative;
+    }
+    .featured-post:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--orange);
+    }
+    .featured-img {
+      min-height: 280px;
+      background: var(--dark);
+      overflow: hidden;
+      position: relative;
+    }
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: linear-gradient(135deg, var(--dark) 0%, #2d1f1a 100%);
+      position: absolute;
+      inset: 0;
+    }
+    .featured-body {
+      padding: 36px 36px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .featured-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .featured-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .featured-excerpt {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid var(--border);
+      padding-top: 16px;
+    }
+    .meta-author { font-size: 0.78rem; font-weight: 600; color: var(--dark); }
+    .meta-date { font-size: 0.72rem; color: var(--muted); }
+    .meta-raised {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.4rem;
       color: var(--orange);
     }
-    .blog-card-delete {
+    .featured-delete {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 12px;
       background: var(--dark);
       color: var(--cream);
       border: none;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       font-size: 0.75rem;
       cursor: pointer;
       display: none;
       align-items: center;
       justify-content: center;
       font-weight: 700;
+      z-index: 2;
     }
-    .blog-card:hover .blog-card-delete { display: flex; }
-    .blog-card-delete:hover { background: var(--orange); }
+    .featured-post:hover .featured-delete { display: flex; }
+    .featured-delete:hover { background: var(--orange); }
 
-    /* ── PORTFOLIO GRID ── */
-    .portfolio-upcoming {
-      margin-bottom: 48px;
-    }
-    .subsection-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .project-card {
-      background: var(--white);
-      border: 3px solid var(--dark);
-      position: relative;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .project-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 6px 6px 0 var(--orange);
-    }
-    .project-card.upcoming {
-      border-color: var(--orange);
-      background: var(--cream);
-    }
-    .project-card-head {
-      background: var(--dark);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .project-card.upcoming .project-card-head {
-      background: var(--orange);
-    }
-    .project-status {
+    /* ── POST TAG PILL ── */
+    .tag-pill {
+      display: inline-block;
+      padding: 4px 12px;
       font-size: 0.62rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-    }
-    .project-date-badge {
-      font-family: 'Abril Fatface', serif;
-      font-size: 0.85rem;
       color: white;
+      margin-bottom: 12px;
     }
-    .project-card-body { padding: 20px; }
-    .project-name {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.3rem;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-    .project-raised {
-      display: inline-block;
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.8rem;
-      color: var(--orange);
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-    .project-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .project-card-delete {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: none;
-      width: 22px;
-      height: 22px;
-      font-size: 0.7rem;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-    }
-    .project-card:hover .project-card-delete { display: flex; }
-    .project-card-delete:hover { background: rgba(255,255,255,0.3); }
+    .tag-pill.Update      { background: #4a7c59; }
+    .tag-pill.Fundraiser  { background: var(--orange); }
+    .tag-pill.Event       { background: #2e6ea6; }
+    .tag-pill.Announcement{ background: #7a3d8a; }
+    .tag-pill.Community   { background: #a06020; }
+    .tag-pill.Upcoming    { background: var(--dark); }
 
-    /* ── MODAL ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(26,19,17,0.75);
-      z-index: 200;
+    /* ── GRID ── */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .post-card {
+      background: var(--white);
+      border: 3px solid var(--dark);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0 var(--orange);
+    }
+    .post-card-img {
+      height: 180px;
+      background: var(--dark);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .post-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .post-card-img-placeholder {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--dark) 0%, #2d1f1a 100%);
+    }
+    .post-card-body { padding: 20px 22px; flex: 1; }
+    .post-card-date { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .post-card-title { font-family: 'Abril Fatface', serif; font-size: 1.25rem; line-height: 1.1; color: var(--dark); margin-bottom: 10px; }
+    .post-card-excerpt { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .post-card-footer {
+      padding: 12px 22px;
+      border-top: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .post-card-author { font-size: 0.72rem; font-weight: 600; color: var(--dark); }
+    .post-card-raised { font-family: 'Abril Fatface', serif; font-size: 1.1rem; color: var(--orange); }
+    .read-more { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); }
+    .post-card-delete {
+      position: absolute; top: 8px; right: 8px;
+      background: var(--dark); color: var(--cream);
+      border: none; width: 24px; height: 24px;
+      font-size: 0.7rem; cursor: pointer;
+      display: none; align-items: center; justify-content: center; font-weight: 700; z-index: 2;
+    }
+    .post-card:hover .post-card-delete { display: flex; }
+    .post-card-delete:hover { background: var(--orange); }
+
+    /* ── FULL POST VIEW ── */
+    #post-full-view { display: none; }
+    .post-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: none;
+      font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--orange); cursor: pointer; margin-bottom: 36px; padding: 0;
+    }
+    .post-back:hover { text-decoration: underline; }
+    .post-hero-img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border: 3px solid var(--dark);
+      margin-bottom: 36px;
+      display: block;
+    }
+    .post-full-tag { margin-bottom: 14px; }
+    .post-full-date { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .post-full-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1;
+      color: var(--dark);
+      margin-bottom: 16px;
+      max-width: 820px;
+    }
+    .post-full-meta {
+      display: flex; align-items: center; gap: 24px;
+      padding: 16px 0 36px;
+      border-bottom: 3px solid var(--dark);
+      margin-bottom: 40px;
+    }
+    .post-full-author { font-size: 0.85rem; font-weight: 600; color: var(--dark); }
+    .post-full-raised {
+      font-family: 'Abril Fatface', serif; font-size: 1.8rem; color: var(--orange);
+    }
+    .post-full-body {
+      font-size: 1rem; line-height: 1.95; color: var(--dark);
+      max-width: 720px; white-space: pre-wrap;
+    }
+
+    /* ── EMPTY ── */
+    .empty-state {
+      text-align: center; padding: 80px 20px; color: var(--muted);
+      grid-column: 1 / -1;
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .empty-state p { font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(26,19,17,0.8);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
       padding: 24px;
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0; pointer-events: none;
       transition: opacity 0.2s;
     }
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
     .modal {
       background: var(--cream);
       border: 4px solid var(--dark);
-      box-shadow: 12px 12px 0 var(--orange);
-      width: 100%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
+      box-shadow: 14px 14px 0 var(--orange);
+      width: 100%; max-width: 620px;
+      max-height: 92vh; overflow-y: auto;
       transform: translateY(20px);
       transition: transform 0.2s;
     }
     .modal-overlay.open .modal { transform: translateY(0); }
     .modal-head {
-      background: var(--dark);
-      padding: 24px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: var(--dark); padding: 22px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 1;
     }
-    .modal-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.4rem;
-      color: var(--cream);
-    }
-    .modal-close {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.5);
-      font-size: 1.4rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: color 0.15s;
-    }
+    .modal-title { font-family: 'Abril Fatface', serif; font-size: 1.3rem; color: var(--cream); }
+    .modal-close { background: none; border: none; color: rgba(255,255,255,0.4); font-size: 1.4rem; cursor: pointer; transition: color 0.15s; }
     .modal-close:hover { color: var(--orange); }
     .modal-body { padding: 28px; }
 
-    /* ── FORM FIELDS ── */
+    /* ── AUTH MODAL ── */
+    .auth-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .auth-error { color: var(--orange); font-size: 0.8rem; margin-top: 8px; display: none; font-weight: 600; }
+
+    /* ── FORM ── */
     .field { margin-bottom: 18px; }
-    .field label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--dark);
-      margin-bottom: 7px;
-    }
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      padding: 12px 14px;
+    .field label { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--dark); margin-bottom: 7px; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 12px 14px;
       border: 3px solid var(--dark);
       background: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.92rem;
-      color: var(--dark);
-      outline: none;
+      font-family: 'Montserrat', sans-serif; font-size: 0.92rem;
+      color: var(--dark); outline: none;
       transition: border-color 0.15s, box-shadow 0.15s;
-      border-radius: 0;
-      appearance: none;
+      border-radius: 0; appearance: none;
     }
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
+    .field input:focus, .field textarea:focus, .field select:focus {
       border-color: var(--orange);
       box-shadow: 4px 4px 0 var(--orange);
     }
-    .field textarea { min-height: 120px; resize: vertical; }
+    .field textarea { min-height: 140px; resize: vertical; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    .modal-submit {
-      width: 100%;
-      background: var(--dark);
-      color: var(--cream);
-      border: none;
-      padding: 16px;
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.1rem;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: all 0.15s;
-    }
-    .modal-submit:hover {
-      background: var(--orange);
-      box-shadow: 4px 4px 0 var(--dark);
-    }
-
-    /* ── FULL POST VIEW ── */
-    .post-view { display: none; }
-    .post-view.active { display: block; }
-    .post-view-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: none;
-      border: none;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--orange);
-      cursor: pointer;
-      margin-bottom: 32px;
-      padding: 0;
-    }
-    .post-view-back:hover { text-decoration: underline; }
-    .post-view-tag {
-      display: inline-block;
-      background: var(--orange);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      margin-bottom: 16px;
-    }
-    .post-view-date {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .post-view-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1;
-      color: var(--dark);
-      margin-bottom: 16px;
-      max-width: 700px;
-    }
-    .post-view-author {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 40px;
-      padding-bottom: 32px;
-      border-bottom: 2px solid var(--dark);
-    }
-    .post-view-body {
-      font-size: 1rem;
-      line-height: 1.9;
-      color: var(--dark);
-      max-width: 680px;
-      white-space: pre-wrap;
-    }
-
-    /* ── EMPTY STATE ── */
-    .empty-state {
+    /* Image upload */
+    .img-upload-area {
+      border: 3px dashed var(--border);
+      padding: 28px;
       text-align: center;
-      padding: 80px 20px;
-      color: var(--muted);
-    }
-    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 16px; }
-    .empty-state p { font-size: 0.9rem; line-height: 1.7; }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      display: flex;
-      gap: 0;
-      margin-bottom: 40px;
-      border: 3px solid var(--dark);
-      overflow: hidden;
-    }
-    .stat-item {
-      flex: 1;
-      padding: 20px 24px;
-      border-right: 3px solid var(--dark);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
       background: var(--white);
+      position: relative;
     }
-    .stat-item:last-child { border-right: none; }
-    .stat-val {
-      font-family: 'Abril Fatface', serif;
-      font-size: 2rem;
-      color: var(--orange);
-      line-height: 1;
+    .img-upload-area:hover { border-color: var(--orange); background: var(--cream); }
+    .img-upload-area.has-image { border-style: solid; border-color: var(--dark); padding: 0; overflow: hidden; }
+    .img-upload-area img { width: 100%; max-height: 200px; object-fit: cover; display: block; }
+    .img-upload-area input[type="file"] { display: none; }
+    .img-upload-text { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+    .img-upload-icon { font-size: 2rem; }
+    .img-remove-btn {
+      position: absolute; top: 8px; right: 8px;
+      background: var(--dark); color: var(--cream);
+      border: none; padding: 4px 10px; font-size: 0.7rem;
+      cursor: pointer; font-weight: 700; display: none;
     }
-    .stat-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 4px;
-    }
+    .img-upload-area.has-image .img-remove-btn { display: block; }
 
-    @media (max-width: 600px) {
+    .modal-submit {
+      width: 100%; background: var(--dark); color: var(--cream);
+      border: none; padding: 16px;
+      font-family: 'Abril Fatface', serif; font-size: 1.1rem;
+      cursor: pointer; margin-top: 8px; transition: all 0.15s;
+    }
+    .modal-submit:hover { background: var(--orange); box-shadow: 4px 4px 0 var(--dark); }
+
+    .new-post-btn {
+      display: none;
+      align-items: center; gap: 8px;
+      background: var(--orange); color: white;
+      border: none; padding: 12px 22px;
+      font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.15s; flex-shrink: 0;
+    }
+    .new-post-btn.visible { display: inline-flex; }
+    .new-post-btn:hover { background: var(--dark); box-shadow: 4px 4px 0 var(--orange); }
+
+    @media (max-width: 700px) {
       .hero { padding: 48px 6% 40px; }
       .page-body { padding: 36px 6% 60px; }
-      .tabs-bar { padding: 0 6%; }
-      .tab-btn { padding: 14px 16px; font-size: 0.85rem; }
+      .filter-bar { padding: 0 6%; }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-img { min-height: 200px; }
       .field-row { grid-template-columns: 1fr; }
-      .stats-bar { flex-direction: column; }
-      .stat-item { border-right: none; border-bottom: 3px solid var(--dark); }
-      .stat-item:last-child { border-bottom: none; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; }
     }
   </style>
 </head>
@@ -554,380 +505,486 @@
   <div class="hero">
     <div class="hero-eyebrow">Advocacy · Awareness · Action</div>
     <h1>Our Work &<br><span>Updates</span></h1>
-    <p class="hero-sub">Follow our latest blog posts, fundraisers, events, and community impact — all in one place.</p>
+    <p class="hero-sub">Fundraisers, events, community impact, and stories from the field — all in one place.</p>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('blog', this)">Blog</button>
-    <button class="tab-btn" onclick="switchTab('portfolio', this)">Project Portfolio</button>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-val" id="stat-raised">$0</div><div class="stat-label">Total Raised</div></div>
+    <div class="stat-item"><div class="stat-val" id="stat-events">0</div><div class="stat-label">Events</div></div>
+    <div class="stat-item"><div class="stat-val" id="stat-posts">0</div><div class="stat-label">Posts</div></div>
+    <div class="stat-item"><div class="stat-val" id="stat-upcoming">0</div><div class="stat-label">Upcoming</div></div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-tags">
+      <button class="filter-tag active" data-filter="All" onclick="setFilter('All', this)">All</button>
+      <button class="filter-tag" data-filter="Fundraiser" onclick="setFilter('Fundraiser', this)">Fundraisers</button>
+      <button class="filter-tag" data-filter="Event" onclick="setFilter('Event', this)">Events</button>
+      <button class="filter-tag" data-filter="Update" onclick="setFilter('Update', this)">Updates</button>
+      <button class="filter-tag" data-filter="Upcoming" onclick="setFilter('Upcoming', this)">Upcoming</button>
+      <button class="filter-tag" data-filter="Announcement" onclick="setFilter('Announcement', this)">Announcements</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 0;">
+      <button class="new-post-btn" id="new-post-btn" onclick="openPostModal()">+ New Post</button>
+      <button class="admin-btn" id="admin-btn" onclick="handleAdminClick()">🔒 Admin</button>
+    </div>
   </div>
 
   <!-- PAGE BODY -->
   <div class="page-body">
 
-    <!-- ── BLOG TAB ── -->
-    <div id="tab-blog" class="tab-panel active">
-
-      <!-- List view -->
-      <div id="blog-list-view">
-        <div class="section-head">
-          <h2>Latest Posts</h2>
-          <button class="add-btn" onclick="openModal('blog')">+ New Post</button>
-        </div>
-        <div class="blog-grid" id="blog-grid"></div>
-      </div>
-
-      <!-- Full post view -->
-      <div class="post-view" id="post-full-view">
-        <button class="post-view-back" onclick="closePost()">← Back to all posts</button>
-        <div class="post-view-tag" id="pv-tag"></div>
-        <div class="post-view-date" id="pv-date"></div>
-        <h1 class="post-view-title" id="pv-title"></h1>
-        <div class="post-view-author" id="pv-author"></div>
-        <div class="post-view-body" id="pv-body"></div>
-      </div>
-
+    <!-- List view -->
+    <div id="list-view">
+      <div id="featured-area"></div>
+      <div class="posts-grid" id="posts-grid"></div>
     </div>
 
-    <!-- ── PORTFOLIO TAB ── -->
-    <div id="tab-portfolio" class="tab-panel">
-      <div class="section-head">
-        <h2>Project Portfolio</h2>
-        <button class="add-btn" onclick="openModal('project')">+ New Project</button>
+    <!-- Full post view -->
+    <div id="post-full-view">
+      <button class="post-back" onclick="closePost()">← Back to all posts</button>
+      <img id="pv-img" class="post-hero-img" src="" alt="" style="display:none;" />
+      <div class="post-full-tag"><span class="tag-pill" id="pv-tag"></span></div>
+      <div class="post-full-date" id="pv-date"></div>
+      <h1 class="post-full-title" id="pv-title"></h1>
+      <div class="post-full-meta">
+        <span class="post-full-author" id="pv-author"></span>
+        <span class="post-full-raised" id="pv-raised"></span>
       </div>
-
-      <!-- Stats -->
-      <div class="stats-bar" id="stats-bar">
-        <div class="stat-item"><div class="stat-val" id="stat-total">$0</div><div class="stat-label">Total Raised</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-events">0</div><div class="stat-label">Events</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-upcoming">0</div><div class="stat-label">Upcoming</div></div>
-      </div>
-
-      <div class="portfolio-upcoming" id="upcoming-section" style="display:none;">
-        <div class="subsection-label">Upcoming</div>
-        <div class="portfolio-grid" id="upcoming-grid"></div>
-      </div>
-
-      <div>
-        <div class="subsection-label">Past Events</div>
-        <div class="portfolio-grid" id="past-grid"></div>
-      </div>
+      <div class="post-full-body" id="pv-body"></div>
     </div>
 
   </div>
 
-  <!-- ── BLOG MODAL ── -->
-  <div class="modal-overlay" id="modal-blog">
+  <!-- ── AUTH MODAL ── -->
+  <div class="modal-overlay" id="modal-auth">
+    <div class="modal" style="max-width:400px;">
+      <div class="modal-head">
+        <div class="modal-title">Admin Access</div>
+        <button class="modal-close" onclick="closeModal('auth')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="auth-desc">Enter the admin password to publish and manage posts.</p>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="auth-pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAuth()" />
+        </div>
+        <div class="auth-error" id="auth-error">Incorrect password. Try again.</div>
+        <button class="modal-submit" onclick="checkAuth()">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NEW POST MODAL ── -->
+  <div class="modal-overlay" id="modal-post">
     <div class="modal">
       <div class="modal-head">
-        <div class="modal-title">New Blog Post</div>
-        <button class="modal-close" onclick="closeModal('blog')">✕</button>
+        <div class="modal-title">New Post</div>
+        <button class="modal-close" onclick="closeModal('post')">✕</button>
       </div>
       <div class="modal-body">
         <div class="field-row">
           <div class="field">
             <label>Title *</label>
-            <input type="text" id="b-title" placeholder="Post title" />
+            <input type="text" id="f-title" placeholder="Post title" />
           </div>
           <div class="field">
             <label>Category</label>
-            <select id="b-tag">
-              <option>Update</option>
-              <option>Event Recap</option>
+            <select id="f-tag">
               <option>Fundraiser</option>
-              <option>Community</option>
+              <option>Event</option>
+              <option>Update</option>
+              <option>Upcoming</option>
               <option>Announcement</option>
+              <option>Community</option>
             </select>
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label>Author</label>
-            <input type="text" id="b-author" placeholder="Your name" />
+            <input type="text" id="f-author" placeholder="Your name" />
           </div>
           <div class="field">
             <label>Date</label>
-            <input type="date" id="b-date" />
+            <input type="date" id="f-date" />
           </div>
         </div>
-        <div class="field">
-          <label>Excerpt (shown on card)</label>
-          <input type="text" id="b-excerpt" placeholder="One-sentence summary..." />
+        <div class="field-row">
+          <div class="field">
+            <label>Amount Raised ($) <span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input type="number" id="f-raised" placeholder="e.g. 214" min="0" />
+          </div>
+          <div class="field">
+            <label>Excerpt <span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input type="text" id="f-excerpt" placeholder="One-line summary" />
+          </div>
         </div>
-        <div class="field">
-          <label>Full Post Content *</label>
-          <textarea id="b-body" placeholder="Write your full post here..."></textarea>
-        </div>
-        <button class="modal-submit" onclick="saveBlogPost()">Publish Post</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- ── PROJECT MODAL ── -->
-  <div class="modal-overlay" id="modal-project">
-    <div class="modal">
-      <div class="modal-head">
-        <div class="modal-title">New Project / Event</div>
-        <button class="modal-close" onclick="closeModal('project')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="field-row">
-          <div class="field">
-            <label>Event Name *</label>
-            <input type="text" id="p-name" placeholder="e.g. Spring Bake Sale" />
-          </div>
-          <div class="field">
-            <label>Status</label>
-            <select id="p-status">
-              <option value="past">Past Event</option>
-              <option value="upcoming">Upcoming</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Date</label>
-            <input type="text" id="p-date" placeholder="e.g. 10/17/25" />
-          </div>
-          <div class="field">
-            <label>Amount Raised ($)</label>
-            <input type="number" id="p-raised" placeholder="e.g. 214" min="0" />
-          </div>
-        </div>
+        <!-- Image upload -->
         <div class="field">
-          <label>Description *</label>
-          <textarea id="p-desc" placeholder="Describe the event..."></textarea>
+          <label>Cover Image <span style="opacity:.5;font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <div class="img-upload-area" id="img-upload-area" onclick="document.getElementById('f-image').click()">
+            <input type="file" id="f-image" accept="image/*" onchange="handleImageUpload(event)" />
+            <div id="img-placeholder">
+              <div class="img-upload-icon">📷</div>
+              <div class="img-upload-text">Click to upload a photo</div>
+            </div>
+            <img id="img-preview" src="" alt="" style="display:none;" />
+            <button class="img-remove-btn" onclick="event.stopPropagation(); removeImage()">✕ Remove</button>
+          </div>
         </div>
-        <button class="modal-submit" onclick="saveProject()">Save Project</button>
+
+        <div class="field">
+          <label>Post Content *</label>
+          <textarea id="f-body" placeholder="Write your full post here..."></textarea>
+        </div>
+        <button class="modal-submit" onclick="savePost()">Publish Post</button>
       </div>
     </div>
   </div>
 
   <script>
-    // ── DEFAULT DATA ──
-    const DEFAULT_POSTS = [];
+    // ─────────────────────────────────────────
+    // CONFIG — change this password!
+    // ─────────────────────────────────────────
+    const ADMIN_PASSWORD = "hau2025";
 
-    const DEFAULT_PROJECTS = [
+    // ─────────────────────────────────────────
+    // DEFAULT DATA
+    // ─────────────────────────────────────────
+    const DEFAULTS = [
       {
-        id: 'proj-1', name: '5k Fundraiser', status: 'upcoming',
-        date: 'Coming Soon', raised: null,
-        desc: 'Stay tuned for details on our upcoming 5k fundraiser run.'
+        id: 'p-1', tag: 'Upcoming', title: '5k Fundraiser',
+        author: 'HAU Team', date: '', raised: null, image: null,
+        excerpt: 'Stay tuned for details on our upcoming 5k fundraiser run.',
+        body: 'Stay tuned for more details on our upcoming 5k fundraiser run. This event will bring the community together to raise funds for unhoused individuals across Massachusetts.'
       },
       {
-        id: 'proj-2', name: 'SAAG Fundraiser', status: 'past',
-        date: '10/10/25', raised: 46,
-        desc: 'The HAU team participated in the SAAG Clothing Fundraiser, selling candles and earrings at the garba. Through the fundraiser, we raised $46 to support the unhoused. Overall, this event was a successful opportunity to raise funds and build support for our mission.'
+        id: 'p-2', tag: 'Fundraiser', title: 'SAAG Fundraiser',
+        author: 'HAU Team', date: '2025-10-10', raised: 46, image: null,
+        excerpt: 'We sold candles and earrings at the garba, raising $46 for the unhoused.',
+        body: 'The HAU team participated in the SAAG Clothing Fundraiser on October 10th, 2025, selling candles and earrings at the garba. Through the fundraiser, we raised $46 to support the unhoused. Overall, this event was a successful opportunity to raise funds and build support for our mission.'
       },
       {
-        id: 'proj-3', name: '3k Fundraiser', status: 'past',
-        date: '10/17/25', raised: 56,
-        desc: 'HAU hosted a community 3k run to raise funds and awareness for unhoused individuals. Participants finished the route at a small stand where volunteers sold food and treats. The event raised $56, contributing directly to our proceeds for the unhoused.'
+        id: 'p-3', tag: 'Event', title: '3k Fundraiser Run',
+        author: 'HAU Team', date: '2025-10-17', raised: 56, image: null,
+        excerpt: 'Our community 3k run raised $56 and brought the neighborhood together.',
+        body: 'On October 17th, 2025, HAU hosted a community 3k run to raise funds and awareness for unhoused individuals. Participants finished the route at a small stand where volunteers sold food and treats. The event raised $56, contributing directly to our proceeds for the unhoused. It was a positive way to bring the neighborhood together around an important cause.'
       },
       {
-        id: 'proj-4', name: 'Candle Fundraiser', status: 'past',
-        date: '', raised: 469,
-        desc: 'Sold candles door to door around North and South Legacy Farms.'
+        id: 'p-4', tag: 'Fundraiser', title: 'Candle Fundraiser',
+        author: 'HAU Team', date: '', raised: 469, image: null,
+        excerpt: 'Door-to-door candle sales across Legacy Farms raised $469.',
+        body: 'Sold candles door to door around North and South Legacy Farms. This was one of our most impactful early fundraisers, raising $469 directly toward supplies for unhoused individuals in our community.'
       },
       {
-        id: 'proj-5', name: 'Earring Fundraiser', status: 'past',
-        date: '', raised: 386,
-        desc: 'Sold earrings door to door throughout the neighborhood, raising $386.'
+        id: 'p-5', tag: 'Fundraiser', title: 'Earring Fundraiser',
+        author: 'HAU Team', date: '', raised: 386, image: null,
+        excerpt: 'Door-to-door earring sales raised $386 for the unhoused.',
+        body: 'Sold earrings door to door throughout the neighborhood, raising $386. The handmade earrings were a big hit with the community and helped us grow awareness alongside our fundraising efforts.'
       },
       {
-        id: 'proj-6', name: 'Bake Sale', status: 'past',
-        date: '11/24–25/2025', raised: 214,
-        desc: 'HAU held a bake sale to support advocacy for the unhoused. Club members went door-to-door selling handmade candles throughout the neighborhood and later hosted both a candle and baked-goods sale after school on Monday and Tuesday. The effort raised a total of $214, making it one of our most successful fundraisers of the year.'
+        id: 'p-6', tag: 'Fundraiser', title: 'Bake Sale',
+        author: 'HAU Team', date: '2025-11-24', raised: 214, image: null,
+        excerpt: 'A two-day bake sale and candle sale raised $214 — one of our best yet.',
+        body: 'HAU held a bake sale to support advocacy for the unhoused. Club members went door-to-door selling handmade candles throughout the neighborhood and later hosted both a candle and baked-goods sale after school on Monday and Tuesday. The effort raised a total of $214, making it one of our most successful fundraisers of the year. The event helped strengthen community engagement while contributing meaningful support to our mission.'
       }
     ];
 
-    // ── STORAGE ──
-    async function loadData(key, fallback) {
+    // ─────────────────────────────────────────
+    // STATE
+    // ─────────────────────────────────────────
+    let posts = [];
+    let activeFilter = 'All';
+    let isAdmin = false;
+    let uploadedImageData = null;
+
+    // ─────────────────────────────────────────
+    // STORAGE
+    // ─────────────────────────────────────────
+    async function loadData() {
       try {
-        const result = await window.storage.get(key);
-        return result ? JSON.parse(result.value) : fallback;
-      } catch { return fallback; }
+        const r = await window.storage.get('hau:posts-v2');
+        posts = r ? JSON.parse(r.value) : DEFAULTS;
+      } catch { posts = DEFAULTS; }
+    }
+    async function saveData() {
+      try { await window.storage.set('hau:posts-v2', JSON.stringify(posts)); }
+      catch(e) { console.error(e); }
     }
 
-    async function saveData(key, value) {
-      try {
-        await window.storage.set(key, JSON.stringify(value));
-      } catch(e) { console.error('Storage error', e); }
-    }
-
-    let blogPosts = [];
-    let projects = [];
-
+    // ─────────────────────────────────────────
+    // INIT
+    // ─────────────────────────────────────────
     async function init() {
-      blogPosts = await loadData('hau:blog-posts', DEFAULT_POSTS);
-      projects  = await loadData('hau:projects', DEFAULT_PROJECTS);
-      renderBlog();
-      renderPortfolio();
+      await loadData();
+      document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+      render();
     }
 
-    // ── TABS ──
-    function switchTab(name, btn) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-      btn.classList.add('active');
-      closePost();
+    // ─────────────────────────────────────────
+    // RENDER
+    // ─────────────────────────────────────────
+    function filteredPosts() {
+      const sorted = [...posts].sort((a,b) => {
+        if (a.tag === 'Upcoming' && b.tag !== 'Upcoming') return -1;
+        if (b.tag === 'Upcoming' && a.tag !== 'Upcoming') return 1;
+        return new Date(b.date||'1970') - new Date(a.date||'1970');
+      });
+      if (activeFilter === 'All') return sorted;
+      return sorted.filter(p => p.tag === activeFilter);
     }
 
-    // ── BLOG RENDER ──
-    function renderBlog() {
-      const grid = document.getElementById('blog-grid');
-      if (!blogPosts.length) {
-        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
-          <div class="empty-icon">✍️</div>
-          <p>No posts yet.<br>Hit <strong>+ New Post</strong> to publish your first update.</p>
-        </div>`;
+    function render() {
+      const fp = filteredPosts();
+
+      // Stats (always from all posts)
+      const allRaised = posts.reduce((s,p) => s + (p.raised||0), 0);
+      const allEvents = posts.filter(p => p.tag === 'Fundraiser' || p.tag === 'Event').length;
+      const allUpcoming = posts.filter(p => p.tag === 'Upcoming').length;
+      document.getElementById('stat-raised').textContent  = '$' + allRaised.toLocaleString();
+      document.getElementById('stat-events').textContent  = allEvents;
+      document.getElementById('stat-posts').textContent   = posts.length;
+      document.getElementById('stat-upcoming').textContent = allUpcoming;
+
+      if (!fp.length) {
+        document.getElementById('featured-area').innerHTML = '';
+        document.getElementById('posts-grid').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>No posts in this category yet.</p>
+          </div>`;
         return;
       }
-      const sorted = [...blogPosts].sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
-      grid.innerHTML = sorted.map(p => `
-        <div class="blog-card" onclick="openPost('${p.id}')">
-          <button class="blog-card-delete" onclick="event.stopPropagation(); deletePost('${p.id}')">✕</button>
-          <div class="blog-card-tag">${p.tag}</div>
-          <div class="blog-card-body">
-            <div class="blog-card-date">${formatDate(p.date)}</div>
-            <div class="blog-card-title">${p.title}</div>
-            <div class="blog-card-excerpt">${p.excerpt || p.body.substring(0,120) + '…'}</div>
-          </div>
-          <div class="blog-card-footer">
-            <span class="blog-card-author">By ${p.author || 'HAU Team'}</span>
-            <span class="read-more">Read More →</span>
-          </div>
-        </div>`).join('');
+
+      // Featured = first post
+      const [first, ...rest] = fp;
+      renderFeatured(first);
+      renderGrid(rest);
     }
 
+    function renderFeatured(p) {
+      const imgHtml = p.image
+        ? `<img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;display:block;" />`
+        : `<div class="featured-img-placeholder">${tagEmoji(p.tag)}</div>`;
+      const raisedHtml = p.raised ? `<span class="meta-raised">$${p.raised.toLocaleString()}</span>` : '';
+      const deleteBtn = isAdmin ? `<button class="featured-delete" onclick="event.stopPropagation();deletePost('${p.id}')">✕</button>` : '';
+
+      document.getElementById('featured-area').innerHTML = `
+        <div class="featured-post" onclick="openPost('${p.id}')">
+          ${deleteBtn}
+          <div class="featured-img">${imgHtml}</div>
+          <div class="featured-body">
+            <div>
+              <div class="featured-label">Featured</div>
+              <span class="tag-pill ${p.tag}">${p.tag}</span>
+              <div class="featured-title">${p.title}</div>
+              <div class="featured-excerpt">${p.excerpt || p.body.substring(0,160) + '…'}</div>
+            </div>
+            <div class="featured-meta">
+              <div>
+                <div class="meta-author">By ${p.author || 'HAU Team'}</div>
+                <div class="meta-date">${formatDate(p.date)}</div>
+              </div>
+              ${raisedHtml}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderGrid(items) {
+      if (!items.length) { document.getElementById('posts-grid').innerHTML = ''; return; }
+      document.getElementById('posts-grid').innerHTML = items.map(p => {
+        const imgHtml = p.image
+          ? `<img src="${p.image}" alt="${p.title}" />`
+          : `<div class="post-card-img-placeholder">${tagEmoji(p.tag)}</div>`;
+        const raisedHtml = p.raised ? `<span class="post-card-raised">$${p.raised.toLocaleString()}</span>` : `<span class="read-more">Read More →</span>`;
+        const deleteBtn = isAdmin ? `<button class="post-card-delete" onclick="event.stopPropagation();deletePost('${p.id}')">✕</button>` : '';
+        return `
+          <div class="post-card" onclick="openPost('${p.id}')">
+            ${deleteBtn}
+            <div class="post-card-img">${imgHtml}</div>
+            <div class="post-card-body">
+              <span class="tag-pill ${p.tag}">${p.tag}</span>
+              <div class="post-card-date">${formatDate(p.date)}</div>
+              <div class="post-card-title">${p.title}</div>
+              <div class="post-card-excerpt">${p.excerpt || p.body.substring(0,110) + '…'}</div>
+            </div>
+            <div class="post-card-footer">
+              <span class="post-card-author">By ${p.author || 'HAU Team'}</span>
+              ${raisedHtml}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
+    // OPEN / CLOSE POST
+    // ─────────────────────────────────────────
     function openPost(id) {
-      const p = blogPosts.find(x => x.id === id);
+      const p = posts.find(x => x.id === id);
       if (!p) return;
-      document.getElementById('blog-list-view').style.display = 'none';
-      const pv = document.getElementById('post-full-view');
-      pv.classList.add('active');
-      document.getElementById('pv-tag').textContent = p.tag;
+      document.getElementById('list-view').style.display = 'none';
+      document.getElementById('post-full-view').style.display = 'block';
+
+      const pvImg = document.getElementById('pv-img');
+      if (p.image) { pvImg.src = p.image; pvImg.style.display = 'block'; }
+      else { pvImg.style.display = 'none'; }
+
+      const tagEl = document.getElementById('pv-tag');
+      tagEl.textContent = p.tag;
+      tagEl.className = 'tag-pill ' + p.tag;
       document.getElementById('pv-date').textContent = formatDate(p.date);
       document.getElementById('pv-title').textContent = p.title;
       document.getElementById('pv-author').textContent = 'By ' + (p.author || 'HAU Team');
+      document.getElementById('pv-raised').textContent = p.raised ? '$' + p.raised.toLocaleString() + ' raised' : '';
       document.getElementById('pv-body').textContent = p.body;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function closePost() {
-      document.getElementById('blog-list-view').style.display = '';
-      document.getElementById('post-full-view').classList.remove('active');
+      document.getElementById('list-view').style.display = '';
+      document.getElementById('post-full-view').style.display = 'none';
     }
 
+    // ─────────────────────────────────────────
+    // DELETE
+    // ─────────────────────────────────────────
     function deletePost(id) {
       if (!confirm('Delete this post?')) return;
-      blogPosts = blogPosts.filter(p => p.id !== id);
-      saveData('hau:blog-posts', blogPosts);
-      renderBlog();
+      posts = posts.filter(p => p.id !== id);
+      saveData();
+      render();
     }
 
-    // ── PORTFOLIO RENDER ──
-    function renderPortfolio() {
-      const upcoming = projects.filter(p => p.status === 'upcoming');
-      const past     = projects.filter(p => p.status === 'past');
-
-      const upcomingSection = document.getElementById('upcoming-section');
-      upcomingSection.style.display = upcoming.length ? '' : 'none';
-      document.getElementById('upcoming-grid').innerHTML = upcoming.map(projectCard).join('');
-      document.getElementById('past-grid').innerHTML = past.length
-        ? past.map(projectCard).join('')
-        : `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📋</div><p>No past events yet.</p></div>`;
-
-      // Stats
-      const totalRaised = projects.reduce((sum, p) => sum + (p.raised || 0), 0);
-      document.getElementById('stat-total').textContent = '$' + totalRaised.toLocaleString();
-      document.getElementById('stat-events').textContent = past.length;
-      document.getElementById('stat-upcoming').textContent = upcoming.length;
+    // ─────────────────────────────────────────
+    // FILTER
+    // ─────────────────────────────────────────
+    function setFilter(f, btn) {
+      activeFilter = f;
+      document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      closePost();
+      render();
     }
 
-    function projectCard(p) {
-      return `<div class="project-card ${p.status}">
-        <button class="project-card-delete" onclick="deleteProject('${p.id}')">✕</button>
-        <div class="project-card-head">
-          <span class="project-status">${p.status === 'upcoming' ? '⬆ Upcoming' : '✓ Completed'}</span>
-          ${p.date ? `<span class="project-date-badge">${p.date}</span>` : ''}
-        </div>
-        <div class="project-card-body">
-          <div class="project-name">${p.name}</div>
-          ${p.raised ? `<div class="project-raised">$${p.raised.toLocaleString()}</div>` : ''}
-          <div class="project-desc">${p.desc}</div>
-        </div>
-      </div>`;
+    // ─────────────────────────────────────────
+    // ADMIN AUTH
+    // ─────────────────────────────────────────
+    function handleAdminClick() {
+      if (isAdmin) {
+        isAdmin = false;
+        document.getElementById('admin-btn').classList.remove('unlocked');
+        document.getElementById('admin-btn').textContent = '🔒 Admin';
+        document.getElementById('new-post-btn').classList.remove('visible');
+        render();
+      } else {
+        openModal('auth');
+      }
     }
 
-    function deleteProject(id) {
-      if (!confirm('Delete this project?')) return;
-      projects = projects.filter(p => p.id !== id);
-      saveData('hau:projects', projects);
-      renderPortfolio();
+    function checkAuth() {
+      const pw = document.getElementById('auth-pw').value;
+      if (pw === ADMIN_PASSWORD) {
+        isAdmin = true;
+        closeModal('auth');
+        document.getElementById('auth-pw').value = '';
+        document.getElementById('auth-error').style.display = 'none';
+        document.getElementById('admin-btn').classList.add('unlocked');
+        document.getElementById('admin-btn').textContent = '🔓 Admin';
+        document.getElementById('new-post-btn').classList.add('visible');
+        render();
+      } else {
+        document.getElementById('auth-error').style.display = 'block';
+        document.getElementById('auth-pw').value = '';
+      }
     }
 
-    // ── MODALS ──
-    function openModal(type) {
-      document.getElementById('modal-' + type).classList.add('open');
-      if (type === 'blog') document.getElementById('b-date').value = new Date().toISOString().split('T')[0];
+    // ─────────────────────────────────────────
+    // IMAGE UPLOAD
+    // ─────────────────────────────────────────
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        uploadedImageData = ev.target.result;
+        const area = document.getElementById('img-upload-area');
+        const preview = document.getElementById('img-preview');
+        const placeholder = document.getElementById('img-placeholder');
+        preview.src = uploadedImageData;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        area.classList.add('has-image');
+      };
+      reader.readAsDataURL(file);
     }
-    function closeModal(type) {
-      document.getElementById('modal-' + type).classList.remove('open');
+
+    function removeImage() {
+      uploadedImageData = null;
+      document.getElementById('f-image').value = '';
+      document.getElementById('img-preview').style.display = 'none';
+      document.getElementById('img-preview').src = '';
+      document.getElementById('img-placeholder').style.display = '';
+      document.getElementById('img-upload-area').classList.remove('has-image');
     }
+
+    // ─────────────────────────────────────────
+    // SAVE POST
+    // ─────────────────────────────────────────
+    function openPostModal() {
+      document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+      openModal('post');
+    }
+
+    function savePost() {
+      const title = document.getElementById('f-title').value.trim();
+      const body  = document.getElementById('f-body').value.trim();
+      if (!title || !body) { alert('Title and content are required.'); return; }
+      const raised = parseFloat(document.getElementById('f-raised').value);
+      const post = {
+        id:      'p-' + Date.now(),
+        title,
+        tag:     document.getElementById('f-tag').value,
+        author:  document.getElementById('f-author').value.trim() || 'HAU Team',
+        date:    document.getElementById('f-date').value,
+        raised:  isNaN(raised) ? null : raised,
+        excerpt: document.getElementById('f-excerpt').value.trim(),
+        image:   uploadedImageData || null,
+        body
+      };
+      posts.unshift(post);
+      saveData();
+      render();
+      closeModal('post');
+      ['f-title','f-author','f-date','f-raised','f-excerpt','f-body'].forEach(id => document.getElementById(id).value = '');
+      removeImage();
+    }
+
+    // ─────────────────────────────────────────
+    // MODALS
+    // ─────────────────────────────────────────
+    function openModal(type) { document.getElementById('modal-' + type).classList.add('open'); }
+    function closeModal(type) { document.getElementById('modal-' + type).classList.remove('open'); }
     document.querySelectorAll('.modal-overlay').forEach(el => {
       el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
     });
 
-    // ── SAVE BLOG ──
-    function saveBlogPost() {
-      const title = document.getElementById('b-title').value.trim();
-      const body  = document.getElementById('b-body').value.trim();
-      if (!title || !body) { alert('Title and content are required.'); return; }
-      const post = {
-        id: 'post-' + Date.now(),
-        title,
-        tag:     document.getElementById('b-tag').value,
-        author:  document.getElementById('b-author').value.trim() || 'HAU Team',
-        date:    document.getElementById('b-date').value,
-        excerpt: document.getElementById('b-excerpt').value.trim(),
-        body
-      };
-      blogPosts.unshift(post);
-      saveData('hau:blog-posts', blogPosts);
-      renderBlog();
-      closeModal('blog');
-      ['b-title','b-author','b-date','b-excerpt','b-body'].forEach(id => document.getElementById(id).value = '');
-    }
-
-    // ── SAVE PROJECT ──
-    function saveProject() {
-      const name = document.getElementById('p-name').value.trim();
-      const desc = document.getElementById('p-desc').value.trim();
-      if (!name || !desc) { alert('Name and description are required.'); return; }
-      const raised = parseFloat(document.getElementById('p-raised').value);
-      const proj = {
-        id:     'proj-' + Date.now(),
-        name,
-        status: document.getElementById('p-status').value,
-        date:   document.getElementById('p-date').value.trim(),
-        raised: isNaN(raised) ? null : raised,
-        desc
-      };
-      projects.unshift(proj);
-      saveData('hau:projects', projects);
-      renderPortfolio();
-      closeModal('project');
-      ['p-name','p-date','p-raised','p-desc'].forEach(id => document.getElementById(id).value = '');
-    }
-
-    // ── UTILS ──
+    // ─────────────────────────────────────────
+    // UTILS
+    // ─────────────────────────────────────────
     function formatDate(d) {
       if (!d) return '';
       const dt = new Date(d + 'T12:00:00');
       if (isNaN(dt)) return d;
       return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function tagEmoji(tag) {
+      const map = { Fundraiser:'💛', Event:'🏃', Update:'📢', Upcoming:'⭐', Announcement:'📣', Community:'🤝' };
+      return map[tag] || '📋';
     }
 
     init();
